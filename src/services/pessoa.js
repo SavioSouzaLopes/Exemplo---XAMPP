@@ -2,20 +2,20 @@ const ModelPessoa = require('../models/pessoa')
 
 // criando a classe servicePessoa
 class ServicePessoa {
-    GetPessoas() {
-        return ModelPessoa.GetPessoas()
+    async GetPessoas() {
+        return ModelPessoa.findAll()
     }
-    CreatePessoa(name) {
+    async CreatePessoa(name) {
         // fazer verificações - se mandou o name
-        return ModelPessoa.CreatePessoa(name)
+        return ModelPessoa.create(name)
     }
-    UpdatePessoa(id, name) {
+    async UpdatePessoa(id, name) {
         // fazer verificações - se mandou o id e o name
-        return ModelPessoa.UpdatePessoa(id, name)
+        return ModelPessoa.update(id, name)
     }
-    DeletePessoa(id) {
+    async DeletePessoa(id) {
         // fazer verificações - se mandou o id
-        return ModelPessoa.DeletePessoa(id)
+        return ModelPessoa.drop(id)
     }
 }
 module.exports = new ServicePessoa()

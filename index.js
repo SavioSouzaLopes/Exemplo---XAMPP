@@ -1,28 +1,21 @@
-// Não é mais tudo !!!!
 const express = require('express')
 const routers = require('./src/routes/pessoa')
+const database = require('./src/config/database')
 
-// Instanciar um express
 const app = express()
-
-// Middleware json - aceita json no body
 app.use(express.json())
-
-// Adicionar as rotas ao express
 app.use(routers)
 
-// Inicializar o servidor
-app.listen(3000, () => {
-    console.info("Servidor rodando na porta 3000")
-})
+database.db
+    .sync({ force: false })
+    .then((_) => {
+        console.info("Banco conectado com Sucesso")
+        app.listen(3000, () => {
+            console.info("Servidor rodando na porta 3000")
+        })
+        
+    })
+    .catch(( e ) => {
+        console.error('Conexão falou: ${e} ')
+    })
 
-// OOOOOOUUUUUU
-
-// // Variavel com a porta
-// const PORT = 3000
-
-// // Inicializar o servidor
-// app.listen(PORT, () => {
-                    // usando o template string
-//     console.info(`Servidor rodando na porta ${PORT}`)
-// })
